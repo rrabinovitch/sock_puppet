@@ -14,9 +14,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    # alert(data['message']) # this will make a pop up appear w the message content
+    # alert(data['message_partial']) # this will make a pop up appear w the message content
     # append the message to the view's html
-    $('messages').append
+    $('#messages').append(data['message_partial'])
 
   speak: (message) ->
     @perform 'speak', message: message

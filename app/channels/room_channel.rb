@@ -13,6 +13,13 @@ class RoomChannel < ApplicationCable::Channel
 
   def speak(data)
     # send information back
-    ActionCable.server.broadcast("room_channel", message: data['message'])
+    ActionCable.server.broadcast("room_channel", message_partial: render_message(data['message']))
+  end
+
+  private
+
+  def render_message(message)
+    # packages the html with the local variable it needs
+    ApplicationController.render(partial: 'messages/message', locals: {message: message})
   end
 end
